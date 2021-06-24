@@ -5,7 +5,7 @@ const fetch = require("../services/fetchService");
 const router = express.Router();
 const graphDomain = "https://graph.microsoft.com/v1.0/"
 
-router.get("/users", async (req, res) => {
+router.get("/", async (req, res) => {
     const graphUrl = graphDomain + "users/?$select=id,displayName,mail";
     try {
         const authResponse = await auth.getToken(auth.tokenRequest);
@@ -17,7 +17,7 @@ router.get("/users", async (req, res) => {
 
 });
 
-router.get("/users/:id", async (req, res) => {
+router.get("/:id", async (req, res) => {
     const graphUrl = graphDomain + "users/" + req.params.id + "?$select=id,displayName,mail";
     try {
         const authResponse = await auth.getToken(auth.tokenRequest);
