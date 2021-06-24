@@ -1,8 +1,6 @@
-// jshint esversion:8
-
 const GeneralError = require("../utils/error");
 
-const handleErrors = (err, req, res, next) => {
+const errorHandler = (err, req, res, next) => {
     if (err instanceof GeneralError) {
         return res.status(err.httpCode).json({
             status: err.httpCode,
@@ -12,4 +10,4 @@ const handleErrors = (err, req, res, next) => {
     }
 };
 
-module.exports = handleErrors;
+module.exports = errorHandler;

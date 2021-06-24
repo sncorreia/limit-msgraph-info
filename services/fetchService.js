@@ -19,7 +19,7 @@ async function callApi(endpoint, accessToken) {
         const response = await axios.default.get(endpoint, options);
         return response.data;
     } catch (error) {
-        console.log(error)
+        //console.log(error)
         return error;
     }
 };
