@@ -1,16 +1,16 @@
 const express = require("express");
 const auth = require("../services/authService");
+const fetch = require("../services/fetchService");
 
 const router = express.Router();
+const graphDomain = "https://graph.microsoft.com/v1.0/"
 
 router.get("/users", async (req, res) => {
+    const graphUrl = graphDomain + "users/?$select=id,displayName,mail";
     try {
         const authResponse = await auth.getToken(auth.tokenRequest);
-        res.status(200).json({
-            "status": "Endpoint Alive",
-            "info": "It will return all the users with limited info from MS Graph",
-            "access_token": authResponse.accessToken
-        })
+        const graphResponse = await fetch.callApi(graphUrl, authResponse.accessToken);
+        res.status(200).json(graphResponse);
     } catch (error) {
         console.log(error);
     }
@@ -18,14 +18,11 @@ router.get("/users", async (req, res) => {
 });
 
 router.get("/users/:id", async (req, res) => {
-    const id = req.params.id;
+    const graphUrl = graphDomain + "users/" + req.params.id + "?$select=id,displayName,mail";
     try {
         const authResponse = await auth.getToken(auth.tokenRequest);
-        res.status(200).json({
-            "status": "Endpoint Alive",
-            "info": `It will return the user ${id} with limited info from MS Graph`,
-            "access_token": authResponse.accessToken
-        })
+        const graphResponse = await fetch.callApi(graphUrl, authResponse.accessToken);
+        res.status(200).json(graphResponse);
     } catch (error) {
         console.log(error);
     }
