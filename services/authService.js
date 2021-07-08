@@ -24,10 +24,6 @@ const tokenRequest = {
     scopes: [process.env.GRAPH_ENDPOINT + '.default'],
 };
 
-const apiConfig = {
-    uri: process.env.GRAPH_ENDPOINT + 'v1.0/',
-};
-
 /**
  * Initialize a confidential client application. For more info, visit:
  * https://github.com/AzureAD/microsoft-authentication-library-for-js/blob/dev/lib/msal-node/docs/initialize-confidential-client-application.md
@@ -43,7 +39,6 @@ async function getToken(tokenRequest) {
 }
 
 module.exports = {
-    apiConfig: apiConfig,
     tokenRequest: tokenRequest,
     getToken: getToken
 };

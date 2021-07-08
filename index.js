@@ -2,21 +2,25 @@
 const express = require("express");
 const morgan = require("morgan");
 const cors = require("cors");
+const passport = require("passport");
 const userRouter = require("./routers/users");
 
 // Require other files
 const GeneralError = require("./utils/error");
 const errorHandler = require("./middleware/errorHandler");
+const bearerStrategy = require("./utils/bearerStrategy");
 
 // Initialize app
 const app = express();
 
 // Set up Middleware
 app.use(morgan('dev'));
+app.use(passport.initialize());
+passport.use(bearerStrategy);
 app.use(cors());
 
 // Set up routing
-app.use("/users", userRouter);
+app.use("/users", passport.authenticate("oauth-bearer", { session: false }), userRouter);
 
 // Throw Bad Request error for each malformed request
 app.all("*", (req, res) => {

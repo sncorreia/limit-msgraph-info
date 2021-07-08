@@ -9,6 +9,11 @@ module.exports = {
     getUserById: getUserById
 };
 
+/**
+ * Returns a client object to call MS Graph.
+ * @param {string} accessToken 
+ * @returns {graph.Client} 
+ */
 function getAuthenticatedClient(accessToken) {
     // Initialize Graph client
     const client = graph.Client.init({
@@ -21,6 +26,10 @@ function getAuthenticatedClient(accessToken) {
     return client;
 }
 
+/**
+ * Get a list of users by calling MS Graph API .
+ * @param {string} accessToken 
+ */
 async function getUsers(accessToken) {
     const client = getAuthenticatedClient(accessToken);
     try {
@@ -34,6 +43,11 @@ async function getUsers(accessToken) {
     }
 }
 
+/**
+ * Get a user by ID by calling MS Graph API .
+ * @param {string} accessToken
+ * @param {string} userId
+ */
 async function getUserById(accessToken, userId) {
     const client = getAuthenticatedClient(accessToken);
     try {

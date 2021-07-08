@@ -1,0 +1,18 @@
+{
+    "resource": {
+        "scope": [
+            "access_as_user"
+        ]
+    },
+    "metadata": {
+        "authority": "login.microsoftonline.com",
+        "discovery": ".well-known/openid-configuration",
+        "version": "v2.0",
+        "issuer": "https://sts.windows.net"
+    },
+    "settings": {
+        "validateIssuer": false,
+        "passReqToCallback": false,
+        "loggingLevel": "info"
+    }
+}

@@ -2,9 +2,6 @@ const express = require("express");
 const auth = require("../services/authService");
 var graph = require('../services/graphService');
 
-// Require other files
-const GeneralError = require("../utils/error");
-
 const router = express.Router();
 
 router.get("/", async (req, res, next) => {
