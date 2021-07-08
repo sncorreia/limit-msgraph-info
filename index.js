@@ -23,7 +23,7 @@ app.all("*", (req, res) => {
     throw new GeneralError("BadRequest", 404, "The path you are trying to reach does not exist");
 });
 
-// Set up custom error handling middleware
+// Set up custom error handling middleware - this should be defined at last, after all other app.use() and routes 
 app.use(errorHandler);
 
 const port = process.env.PORT || 5000;

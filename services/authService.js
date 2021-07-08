@@ -25,7 +25,7 @@ const tokenRequest = {
 };
 
 const apiConfig = {
-    uri: process.env.GRAPH_ENDPOINT + 'v1.0/users',
+    uri: process.env.GRAPH_ENDPOINT + 'v1.0/',
 };
 
 /**
