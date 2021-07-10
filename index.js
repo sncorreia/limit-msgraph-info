@@ -19,8 +19,16 @@ app.use(passport.initialize());
 passport.use(bearerStrategy);
 app.use(cors());
 
+// Set up passport middleware to protect the endpoints with AAD
+app.use(passport.authenticate("oauth-bearer", { session: false, failWithError: true }),
+    (req, res, next) => {
+        next();
+    }, (err, req, res, next) => {
+        throw new GeneralError("AuthenticationError", 401, "Authorization failed");
+    });
+
 // Set up routing
-app.use("/users", passport.authenticate("oauth-bearer", { session: false }), userRouter);
+app.use("/users", userRouter);
 
 // Throw Bad Request error for each malformed request
 app.all("*", (req, res) => {
