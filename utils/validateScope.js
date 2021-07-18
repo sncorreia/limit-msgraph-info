@@ -1,6 +1,12 @@
 // Require other files
 const GeneralError = require("./error");
 
+/**
+ * Validates if the scope exists in the authentication object
+ * @param {string} scope
+ * @param {object} authInfo
+ * @throws GeneralError 
+ */
 const validateScope = (scope, authInfo) => {
     if (
         !(

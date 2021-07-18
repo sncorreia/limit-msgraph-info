@@ -36,6 +36,7 @@ async function getUsers(accessToken) {
         const users = await client
             .api('/users')
             .select('id,displayName,mail')
+            .top(5)
             .get();
         return users;
     } catch (error) {
