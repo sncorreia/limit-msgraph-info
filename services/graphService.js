@@ -30,15 +30,23 @@ function getAuthenticatedClient(accessToken) {
  * Get a list of users by calling MS Graph API .
  * @param {string} accessToken 
  */
-async function getUsers(accessToken) {
+async function getUsers(accessToken, skipToken = null) {
     const client = getAuthenticatedClient(accessToken);
     try {
-        const users = await client
-            .api('/users')
-            .select('id,displayName,mail')
-            .top(5)
-            .get();
-        return users;
+        if (skipToken === null) {
+            const users = await client
+                .api('/users')
+                .select('id,displayName,mail')
+                .get();
+            return users;
+        } else {
+            const users = await client
+                .api('/users')
+                .select('id,displayName,mail')
+                .skipToken(skipToken)
+                .get();
+            return users;
+        }
     } catch (error) {
         throw new GeneralError(error.code, error.statusCode, JSON.parse(error.body).message);
     }
